@@ -3,6 +3,12 @@ import FriendsSidebar from "./FriendsSidebar";
 import ChatArea from "./ChatArea";
 import { Chat, Friend, Message } from "./myInterfaces";
 
+declare global {
+  interface Crypto {
+    randomUUID: () => string;
+  }
+}
+
 const friends: Friend[] = [
   {
     id: "1",
@@ -70,7 +76,7 @@ const MessengerApp: React.FC = () => {
     if (!messageInput.trim() || !selectedFriendId) return;
 
     const newMessage: Message = {
-      id: crypto.randomUUID(),
+      id: self.crypto.randomUUID(),
       text: messageInput.trim(),
       senderId: "5",
       timestamp: new Date(),
